@@ -30,3 +30,4 @@ output.dat
 pymodule.py
 pymodule.pyc
 timer.dat
+dcft_sort_mo_tpdm.cc
