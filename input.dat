@@ -1,0 +1,35 @@
+
+# PYTHONPATH must include directory above plugin directory.
+#     Define either externally or here, then import plugin.
+sys.path.insert(0, './..')
+import dfdcft
+
+memory 4 Gb
+
+molecule {
+0 1
+O
+H 1 R
+H 1 R 2 A
+
+R = 1.1
+A = 104.0
+}
+
+set {
+  basis cc-pvdz
+  reference rhf
+  dcft_guess mp2
+  algorithm simultaneous
+  dcft_functional odc-12
+  diis_min_vecs 4
+  diis_start_convergence 1.0E-3
+  r_convergence 1.0E-8
+  maxiter 50
+}
+
+#energy('dfdcft')
+gradient('dfdcft')
+#gradient('dfdcft', dertype=0)
+#optimize('dfdcft')
+
