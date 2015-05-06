@@ -54,9 +54,7 @@ dcft(Options &options)
 
     dcft->compute_energy();
 
-    dcft->set_DCFT(true);
-
-//    std::cout << typeid(dcft).name() << "\n";
+//    dcft->set_DCFT(true);
 
     if (Process::environment.wavefunction()->same_a_b_orbs()){
         outfile->Printf("\tTransform Type: Restricted.\n\n");

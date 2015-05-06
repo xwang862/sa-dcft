@@ -53,6 +53,8 @@ DCFTSolver::mp2_guess()
         std::vector<boost::shared_ptr<MOSpace> > spaces;
         spaces.push_back(MOSpace::occ);
         spaces.push_back(MOSpace::vir);
+        spaces.push_back(MOSpace::all);
+
         // This wavefunction is really the global reference wavefunction
         boost::shared_ptr<Wavefunction> wfn = Process::environment.wavefunction();
 //        _ints = new IntegralTransform(wfn, spaces, IntegralTransform::Unrestricted);

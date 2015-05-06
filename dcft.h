@@ -499,7 +499,8 @@ protected:
        ** where all values are treated as in AA matrix (which causes problems).
        ** Thus, we presort TPDM (MO) here and turn off IntegralTransform::presort_mo_tpdm_restricted().
        */
-    void presort_mo_tpdm_SADCFT();
+    void presort_mo_tpdm_AB();
+    void presort_mo_tpdm_AA();
 
 };
 

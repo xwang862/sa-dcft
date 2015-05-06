@@ -158,15 +158,15 @@ DCFTSolver::compute_energy()
         compute_gradient();
     }
 
-    if (Process::environment.wavefunction()->same_a_b_orbs()){
-        outfile->Printf("\tTransform Type: Restricted.\n\n");
-    }
-    else outfile->Printf("\tTransform Type: Unrestricted.\n\n");
+//    if (Process::environment.wavefunction()->same_a_b_orbs()){
+//        outfile->Printf("\tTransform Type: Restricted.\n\n");
+//    }
+//    else outfile->Printf("\tTransform Type: Unrestricted.\n\n");
 
-    if (Process::environment.wavefunction()->density_fitted()){
-        outfile->Printf("\tDensity Fitting: Yes!\n\n");
-    }
-    else outfile->Printf("\tDensity Fitting: No!\n\n");
+//    if (Process::environment.wavefunction()->density_fitted()){
+//        outfile->Printf("\tDensity Fitting: Yes!\n\n");
+//    }
+//    else outfile->Printf("\tDensity Fitting: No!\n\n");
 
     // Free up memory and close files
     finalize();
