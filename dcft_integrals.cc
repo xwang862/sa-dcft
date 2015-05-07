@@ -451,22 +451,6 @@ DCFTSolver:: sort_VVVV_integrals() {
         global_dpd_->buf4_sort(&I, PSIF_LIBTRANS_DPD, prqs, ID("[V,V]"), ID("[V,V]"), "MO Ints <VV|VV>");
         global_dpd_->buf4_close(&I);
 
-//        global_dpd_->buf4_init(&I, PSIF_LIBTRANS_DPD, 0, ID("[V,V]"), ID("[v,v]"),
-//                      ID("[V>=V]+"), ID("[v>=v]+"), 0, "MO Ints (VV|vv)");
-//        global_dpd_->buf4_sort(&I, PSIF_LIBTRANS_DPD, prqs, ID("[V,v]"), ID("[V,v]"), "MO Ints <Vv|Vv>");
-//        global_dpd_->buf4_close(&I);
-
-//        global_dpd_->buf4_init(&I, PSIF_LIBTRANS_DPD, 0, ID("[V,V]"), ID("[v,v]"),
-//                      ID("[V>=V]+"), ID("[v>=v]+"), 0, "MO Ints (VV|vv)");
-//        global_dpd_->buf4_sort(&I, PSIF_LIBTRANS_DPD, rspq, ID("[v,v]"), ID("[V,V]"), "MO Ints (vv|VV)");
-//        global_dpd_->buf4_close(&I);
-
-//        global_dpd_->buf4_init(&I, PSIF_LIBTRANS_DPD, 0, ID("[v,v]"), ID("[v,v]"),
-//                      ID("[v>=v]+"), ID("[v>=v]+"), 0, "MO Ints (vv|vv)");
-//        global_dpd_->buf4_sort(&I, PSIF_LIBTRANS_DPD, prqs, ID("[v,v]"), ID("[v,v]"), "MO Ints <vv|vv>");
-//        global_dpd_->buf4_close(&I);
-
-
     }
     // If the system is open-shell, then ...
     else{

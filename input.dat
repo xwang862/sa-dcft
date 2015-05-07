@@ -30,6 +30,7 @@ set {
 
 #energy('dfdcft')
 gradient('dfdcft')
+#gradient('ccsd')
 #gradient('dfdcft', dertype=0)
 #optimize('dfdcft')
 

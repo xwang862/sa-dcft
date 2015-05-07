@@ -15,7 +15,7 @@
     A. E. DePrince, M. Saitow, U. Bozkaya, A. Yu. Sokolov
     -----------------------------------------------------------------------
 
-    Process ID:  48131
+    Process ID:  49977
     PSI4DATADIR: /Users/xiaowang/Programs/psi4/lib
     Memory level set to 256.000 MB
 
@@ -54,20 +54,21 @@ set {
 
 #energy('dfdcft')
 gradient('dfdcft')
+#gradient('ccsd')
 #gradient('dfdcft', dertype=0)
 #optimize('dfdcft')
 
 --------------------------------------------------------------------------
 
 *** tstart() called on Xiaos-MacBook-Pro.local
-*** at Wed May  6 01:01:58 2015
+*** at Wed May  6 18:19:05 2015
 
 /Users/xiaowang/Dropbox/QM/PSI4data/sa_dfdcft/5.0/dfdcft/dfdcft.so loaded.
 
   Memory set to   4.000 GiB by Python script.
 
 *** tstart() called on Xiaos-MacBook-Pro.local
-*** at Wed May  6 01:01:58 2015
+*** at Wed May  6 18:19:05 2015
 
 
          ---------------------------------------------------------
@@ -181,29 +182,29 @@ gradient('dfdcft')
 	         A1    A2    B1    B2 
 	DOCC [     3,    0,    1,    1 ]
 
-   @DF-RHF iter   2:   -69.64800674043235   -6.68048e-01   1.87041e-01 
+   @DF-RHF iter   2:   -69.64800674043242   -6.68048e-01   1.87041e-01 
 	Occupation by irrep:
 	         A1    A2    B1    B2 
 	DOCC [     4,    0,    0,    1 ]
 
-   @DF-RHF iter   3:   -72.84049433897529   -3.19249e+00   1.81009e-01 
+   @DF-RHF iter   3:   -72.84049433897528   -3.19249e+00   1.81009e-01 
 	Occupation by irrep:
 	         A1    A2    B1    B2 
 	DOCC [     3,    0,    1,    1 ]
 
    @DF-RHF iter   4:   -72.89522263428761   -5.47283e-02   1.50785e-01 DIIS
    @DF-RHF iter   5:   -75.78763550223184   -2.89241e+00   5.10770e-02 DIIS
-   @DF-RHF iter   6:   -75.98632553607861   -1.98690e-01   4.72717e-03 DIIS
+   @DF-RHF iter   6:   -75.98632553607862   -1.98690e-01   4.72717e-03 DIIS
    @DF-RHF iter   7:   -75.98950588154449   -3.18035e-03   1.01107e-03 DIIS
-   @DF-RHF iter   8:   -75.98975722413888   -2.51343e-04   2.43937e-04 DIIS
-   @DF-RHF iter   9:   -75.98977625652810   -1.90324e-05   7.08065e-05 DIIS
-   @DF-RHF iter  10:   -75.98977750198652   -1.24546e-06   1.15535e-05 DIIS
-   @DF-RHF iter  11:   -75.98977754385562   -4.18691e-08   2.47247e-06 DIIS
-   @DF-RHF iter  12:   -75.98977754534326   -1.48763e-09   5.18598e-07 DIIS
-   @DF-RHF iter  13:   -75.98977754538731   -4.40536e-11   5.24701e-08 DIIS
-   @DF-RHF iter  14:   -75.98977754538754   -2.27374e-13   5.87255e-09 DIIS
-   @DF-RHF iter  15:   -75.98977754538757   -2.84217e-14   1.91548e-10 DIIS
-   @DF-RHF iter  16:   -75.98977754538760   -2.84217e-14   3.27401e-11 DIIS
+   @DF-RHF iter   8:   -75.98975722413896   -2.51343e-04   2.43937e-04 DIIS
+   @DF-RHF iter   9:   -75.98977625652802   -1.90324e-05   7.08065e-05 DIIS
+   @DF-RHF iter  10:   -75.98977750198654   -1.24546e-06   1.15535e-05 DIIS
+   @DF-RHF iter  11:   -75.98977754385558   -4.18690e-08   2.47247e-06 DIIS
+   @DF-RHF iter  12:   -75.98977754534333   -1.48775e-09   5.18598e-07 DIIS
+   @DF-RHF iter  13:   -75.98977754538734   -4.40110e-11   5.24701e-08 DIIS
+   @DF-RHF iter  14:   -75.98977754538751   -1.70530e-13   5.87255e-09 DIIS
+   @DF-RHF iter  15:   -75.98977754538764   -1.27898e-13   1.91547e-10 DIIS
+   @DF-RHF iter  16:   -75.98977754538755    8.52651e-14   3.27406e-11 DIIS
 
   DF guess converged.
 
@@ -240,14 +241,14 @@ gradient('dfdcft')
     Memory (MB):              2861
     Schwarz Cutoff:          1E-12
 
-   @RHF iter  17:   -75.98979576962462   -1.82242e-05   1.36887e-05 DIIS
-   @RHF iter  18:   -75.98979578500901   -1.53844e-08   2.18605e-06 DIIS
-   @RHF iter  19:   -75.98979578548652   -4.77513e-10   6.32026e-07 DIIS
-   @RHF iter  20:   -75.98979578551386   -2.73417e-11   1.93165e-07 DIIS
-   @RHF iter  21:   -75.98979578551780   -3.93641e-12   5.15810e-08 DIIS
-   @RHF iter  22:   -75.98979578551810   -2.98428e-13   6.64486e-09 DIIS
-   @RHF iter  23:   -75.98979578551810    0.00000e+00   8.56372e-10 DIIS
-   @RHF iter  24:   -75.98979578551806    4.26326e-14   8.45400e-11 DIIS
+   @RHF iter  17:   -75.98979576962466   -1.82242e-05   1.36887e-05 DIIS
+   @RHF iter  18:   -75.98979578500894   -1.53843e-08   2.18605e-06 DIIS
+   @RHF iter  19:   -75.98979578548644   -4.77499e-10   6.32026e-07 DIIS
+   @RHF iter  20:   -75.98979578551392   -2.74838e-11   1.93165e-07 DIIS
+   @RHF iter  21:   -75.98979578551781   -3.89377e-12   5.15810e-08 DIIS
+   @RHF iter  22:   -75.98979578551810   -2.84217e-13   6.64486e-09 DIIS
+   @RHF iter  23:   -75.98979578551813   -2.84217e-14   8.56372e-10 DIIS
+   @RHF iter  24:   -75.98979578551807    5.68434e-14   8.45398e-11 DIIS
 
   ==> Post-Iterations <==
 
@@ -275,16 +276,16 @@ gradient('dfdcft')
 
   Energy converged.
 
-  @RHF Final Energy:   -75.98979578551806
+  @RHF Final Energy:   -75.98979578551807
 
    => Energetics <=
 
     Nuclear Repulsion Energy =              8.0023664507190784
-    One-Electron Energy =                -120.9634075027804840
-    Two-Electron Energy =                  36.9712452665433489
+    One-Electron Energy =                -120.9634075027804982
+    Two-Electron Energy =                  36.9712452665433347
     DFT Exchange-Correlation Energy =       0.0000000000000000
     Empirical Dispersion Energy =           0.0000000000000000
-    Total Energy =                        -75.9897957855180550
+    Total Energy =                        -75.9897957855180834
 
 
 
@@ -309,7 +310,7 @@ Properties computed using the SCF density matrix
 
   Saving occupied orbitals to File 180.
 
-*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 01:01:59 2015
+*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 18:19:06 2015
 Module time:
 	user time   =       0.56 seconds =       0.01 minutes
 	system time =       0.03 seconds =       0.00 minutes
@@ -322,7 +323,7 @@ Reading options from the DFDCFT block
 Calling plugin dfdcft.so.
 
 *** tstart() called on Xiaos-MacBook-Pro.local
-*** at Wed May  6 01:01:59 2015
+*** at Wed May  6 18:19:06 2015
 
 
 
@@ -343,9 +344,9 @@ Calling plugin dfdcft.so.
 
 
 	This is a closed-shell molecule so the spin adapted code is used!
-	*Total Hartree-Fock energy        =  -75.989795785518055
+	*Total Hartree-Fock energy        =  -75.989795785518069
 	 Total MP2 correlation energy     =   -0.214347607791116
-	*Total MP2 energy                 =  -76.204143393309167
+	*Total MP2 energy                 =  -76.204143393309181
 
 	DCFT Functional:    		 ODC-12
 	Algorithm:          		 SIMULTANEOUS
@@ -354,25 +355,25 @@ Calling plugin dfdcft.so.
 	*=================================================================================*
 	* Cycle   Max Orb Grad    RMS Lambda Error   delta E        Total Energy     DIIS *
 	*---------------------------------------------------------------------------------*
-	* 1        3.304e-02         2.267e-03     -1.314e-02    -76.217286593817889      *
-	* 2        9.964e-03         8.029e-04     -9.546e-03    -76.226832290339573      *
-	* 3        1.978e-03         3.193e-04      8.281e-03    -76.218551338718868      *
-	* 4        1.038e-03         1.488e-04      1.457e-03    -76.217094318138010      *
-	* 5        5.921e-04         7.160e-05      7.606e-04    -76.216333671415768  S   *
-	* 6        2.746e-04         3.599e-05      3.104e-04    -76.216023265650762  S   *
-	* 7        1.997e-04         1.836e-05      1.428e-04    -76.215880466754157  S   *
-	* 8        8.853e-05         9.714e-06      6.660e-05    -76.215813863715326  S   *
-	* 9        6.951e-05         5.136e-06      3.180e-05    -76.215782064958248  S/E *
-	* 10       2.144e-07         6.305e-08      3.115e-05    -76.215750912659004  S/E *
-	* 11       8.549e-08         1.681e-08     -6.649e-08    -76.215750979151167  S/E *
-	* 12       3.297e-08         5.068e-09      9.279e-08    -76.215750886358634  S/E *
-	* 13       9.619e-09         1.714e-09     -1.251e-08    -76.215750898864499  S/E *
-	* 14       1.580e-09         2.656e-10      1.447e-09    -76.215750897417735  S/E *
+	* 1        3.304e-02         2.267e-03     -1.314e-02    -76.217286593818002      *
+	* 2        9.964e-03         8.029e-04     -9.546e-03    -76.226832290339715      *
+	* 3        1.978e-03         3.193e-04      8.281e-03    -76.218551338718953      *
+	* 4        1.038e-03         1.488e-04      1.457e-03    -76.217094318138180      *
+	* 5        5.921e-04         7.160e-05      7.606e-04    -76.216333671415882  S   *
+	* 6        2.746e-04         3.599e-05      3.104e-04    -76.216023265650904  S   *
+	* 7        1.997e-04         1.836e-05      1.428e-04    -76.215880466754285  S   *
+	* 8        8.853e-05         9.714e-06      6.660e-05    -76.215813863715397  S   *
+	* 9        6.951e-05         5.136e-06      3.180e-05    -76.215782064958347  S/E *
+	* 10       2.144e-07         6.305e-08      3.115e-05    -76.215750912659104  S/E *
+	* 11       8.549e-08         1.681e-08     -6.649e-08    -76.215750979151295  S/E *
+	* 12       3.297e-08         5.068e-09      9.279e-08    -76.215750886358776  S/E *
+	* 13       9.619e-09         1.714e-09     -1.251e-08    -76.215750898864599  S/E *
+	* 14       1.580e-09         2.656e-10      1.447e-09    -76.215750897417834  S/E *
 	*=================================================================================*
 
-	*DCFT SCF Energy                                 =  -75.742982896936837
-	*DCFT Lambda Energy                              =   -0.472768000480904
-	*DCFT Total Energy                               =  -76.215750897417735
+	*DCFT SCF Energy                                 =  -75.742982896936923
+	*DCFT Lambda Energy                              =   -0.472768000480905
+	*DCFT Total Energy                               =  -76.215750897417834
 
 	Orbital occupations:
 		Alpha occupied orbitals
@@ -398,18 +399,18 @@ Calling plugin dfdcft.so.
 		   4B1       0.0009     6B2       0.0008     7B2       0.0003  
 
 
-*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 01:02:03 2015
+*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 18:19:10 2015
 Module time:
-	user time   =       0.51 seconds =       0.01 minutes
-	system time =       0.45 seconds =       0.01 minutes
+	user time   =       0.52 seconds =       0.01 minutes
+	system time =       0.46 seconds =       0.01 minutes
 	total time  =          4 seconds =       0.07 minutes
 Total time:
-	user time   =       1.10 seconds =       0.02 minutes
-	system time =       0.48 seconds =       0.01 minutes
+	user time   =       1.11 seconds =       0.02 minutes
+	system time =       0.49 seconds =       0.01 minutes
 	total time  =          5 seconds =       0.08 minutes
 
 *** tstart() called on Xiaos-MacBook-Pro.local
-*** at Wed May  6 01:02:03 2015
+*** at Wed May  6 18:19:10 2015
 
 
 
@@ -420,24 +421,29 @@ Total time:
 	***********************************************************************************
 
 	 Computing energy-weighted density matrix from one- and two-particle densities...
-	Pre-Presorting MO-basis TPDM.
+	Pre-Presorting MO-basis TPDM: AB.
 
 	Sorting File: MO TPDM (AA|AA) nbuckets = 1
+	Pre-Presorting MO-basis TPDM: AA and BB.
+
+	Sorting File: MO TPDM (AA|AA) TEMP nbuckets = 1
+	nbuckets = 1
+
 	Transform Type: Restricted.
 
 
-*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 01:02:03 2015
+*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 18:19:10 2015
 Module time:
 	user time   =       0.26 seconds =       0.00 minutes
 	system time =       0.02 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
 Total time:
-	user time   =       1.36 seconds =       0.02 minutes
-	system time =       0.50 seconds =       0.01 minutes
+	user time   =       1.37 seconds =       0.02 minutes
+	system time =       0.51 seconds =       0.01 minutes
 	total time  =          5 seconds =       0.08 minutes
 
 *** tstart() called on Xiaos-MacBook-Pro.local
-*** at Wed May  6 01:02:03 2015
+*** at Wed May  6 18:19:10 2015
 
  DERIV: Derivative code.
    by Justin Turney
@@ -519,26 +525,26 @@ Total time:
   -Two-electron contribution to gradient:
      Atom            X                  Y                   Z
     ------   -----------------  -----------------  -----------------
-       1        0.000000000000     0.000000000000     1.924834412745
-       2        0.000000000000     1.273898724325    -0.962417206372
-       3        0.000000000000    -1.273898724325    -0.962417206372
+       1        0.000000000000     0.000000000000     3.307121252616
+       2        0.000000000000     2.192252949001    -1.653560626308
+       3        0.000000000000    -2.192252949001    -1.653560626308
 
 
   -Total gradient:
      Atom            X                  Y                   Z
     ------   -----------------  -----------------  -----------------
-       1        0.000000000000     0.000000000000    -1.474172936690
-       2        0.000000000000    -0.991509703185     0.737086468345
-       3        0.000000000000     0.991509703185     0.737086468345
+       1        0.000000000000     0.000000000000    -0.091886096818
+       2        0.000000000000    -0.073155478509     0.045943048409
+       3        0.000000000000     0.073155478509     0.045943048409
 
 
-*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 01:02:03 2015
+*** tstop() called on Xiaos-MacBook-Pro.local at Wed May  6 18:19:10 2015
 Module time:
 	user time   =       0.17 seconds =       0.00 minutes
-	system time =       0.02 seconds =       0.00 minutes
+	system time =       0.01 seconds =       0.00 minutes
 	total time  =          0 seconds =       0.00 minutes
 Total time:
-	user time   =       1.53 seconds =       0.03 minutes
+	user time   =       1.54 seconds =       0.03 minutes
 	system time =       0.52 seconds =       0.01 minutes
 	total time  =          5 seconds =       0.08 minutes
 

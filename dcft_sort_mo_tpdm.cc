@@ -167,7 +167,19 @@ void DCFTSolver::presort_mo_tpdm_AB()
     set_DCFT(true);
 
     global_dpd_->file4_close(&I);
+
+
+
     psio_->close(PSIF_TPDM_PRESORT, 1);
+
+//    psio_->open(PSIF_TPDM_PRESORT, PSIO_OPEN_OLD);
+    //Check:
+//    dpdbuf4 Iprint;
+//    global_dpd_->buf4_init(&Iprint, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"),
+//                           ID("[A>=A]+"), ID("[A>=A]+"), 0, "MO TPDM (AA|AA)");
+//    global_dpd_->buf4_print(&Iprint, "outfile", 1);
+//    global_dpd_->buf4_close(&Iprint);
+//    psio_->close(PSIF_TPDM_PRESORT, 1);
 
 }
 
@@ -180,7 +192,160 @@ void DCFTSolver::presort_mo_tpdm_AA()
     }
 
     dpdfile4 I;
+    dpdbuf4 Ibuf, Itot;
 
+    psio_->open(PSIF_TPDM_PRESORT, PSIO_OPEN_OLD);
+
+    global_dpd_->buf4_init(&Ibuf, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"),
+                           ID("[A>=A]+"), ID("[A>=A]+"), 0, "MO TPDM (AA|AA)");
+    global_dpd_->buf4_copy(&Ibuf, PSIF_TPDM_PRESORT, "MO TPDM (AA|AA) TEMP");
+    global_dpd_->buf4_close(&Ibuf);
+
+    global_dpd_->file4_init(&I, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"), "MO TPDM (AA|AA) TEMP");
+
+    size_t memoryd = Process::environment.get_memory() / sizeof(double);
+
+    int nump = 0, numq = 0;
+    for(int h = 0; h < nirrep_; ++h){
+        nump += I.params->ppi[h];
+        numq += I.params->qpi[h];
+    }
+    int **bucketMap = init_int_matrix(nump, numq);
+
+    /* Room for one bucket to begin with */
+    int **bucketOffset = (int **) malloc(sizeof(int *));
+    bucketOffset[0] = init_int_array(nirrep_);
+    int **bucketRowDim = (int **) malloc(sizeof(int *));
+    bucketRowDim[0] = init_int_array(nirrep_);
+    int **bucketSize = (int **) malloc(sizeof(int *));
+    bucketSize[0] = init_int_array(nirrep_);
+
+    /* Figure out how many passes we need and where each p,q goes */
+    int nBuckets = 1;
+    size_t coreLeft = memoryd;
+    psio_address next;
+    for(int h = 0; h < nirrep_; ++h){
+        size_t rowLength = (size_t) I.params->coltot[h^(I.my_irrep)];
+        for(int row=0; row < I.params->rowtot[h]; ++row) {
+            if(coreLeft >= rowLength){
+                coreLeft -= rowLength;
+                bucketRowDim[nBuckets-1][h]++;
+                bucketSize[nBuckets-1][h] += rowLength;
+            } else {
+                nBuckets++;
+                coreLeft = memoryd - rowLength;
+                /* Make room for another bucket */
+                bucketOffset = (int **) realloc((void *) bucketOffset,
+                                             nBuckets * sizeof(int *));
+                bucketOffset[nBuckets-1] = init_int_array(nirrep_);
+                bucketOffset[nBuckets-1][h] = row;
+
+                bucketRowDim = (int **) realloc((void *) bucketRowDim,
+                                             nBuckets * sizeof(int *));
+                bucketRowDim[nBuckets-1] = init_int_array(nirrep_);
+                bucketRowDim[nBuckets-1][h] = 1;
+
+                bucketSize = (int **) realloc((void *) bucketSize,
+                                                nBuckets * sizeof(int *));
+                bucketSize[nBuckets-1] = init_int_array(nirrep_);
+                bucketSize[nBuckets-1][h] = rowLength;
+            }
+            int p = I.params->roworb[h][row][0];
+            int q = I.params->roworb[h][row][1];
+            bucketMap[p][q] = nBuckets - 1;
+        }
+    }
+
+    if(print_) {
+        outfile->Printf( "\tSorting File: %s nbuckets = %d\n", I.label, nBuckets);
+
+    }
+
+    next = PSIO_ZERO;
+
+    outfile->Printf("\tnbuckets = %d\n\n", nBuckets);
+
+    for(int n=0; n < nBuckets; ++n) { /* nbuckets = number of passes */
+        /* Prepare target matrix */
+        for(int h=0; h < nirrep_; h++) {
+            I.matrix[h] = block_matrix(bucketRowDim[n][h], I.params->coltot[h]);
+        }
+
+        IWL *iwl = new IWL(psio_.get(), PSIF_MO_TPDM, 1.0E-16, 1, 0);
+        DPDFillerFunctor dpdFiller(&I, n, bucketMap, bucketOffset, true, true);
+
+        Label *lblptr = iwl->labels();
+        Value *valptr = iwl->values();
+        int lastbuf;
+        /* Now run through the IWL buffers */
+        do{
+            iwl->fetch();
+            lastbuf = iwl->last_buffer();
+            for(int index = 0; index < iwl->buffer_count(); ++index){
+                int labelIndex = 4*index;
+                int p = _ints->alpha_corr_to_pitzer()[abs((int) lblptr[labelIndex++])];
+                int q = _ints->alpha_corr_to_pitzer()[(int) lblptr[labelIndex++]];
+                int r = _ints->alpha_corr_to_pitzer()[(int) lblptr[labelIndex++]];
+                int s = _ints->alpha_corr_to_pitzer()[(int) lblptr[labelIndex++]];
+                double value = (double) valptr[index];
+                // Check:
+//                outfile->Printf("\t%4d %4d %4d %4d = %20.10f\n", p, q, r, s, value);
+                dpdFiller(p, q, r, s, value);
+
+
+            } /* end loop through current buffer */
+        } while(!lastbuf); /* end loop over reading buffers */
+        iwl->set_keep_flag(1);
+        delete iwl;
+
+        for(int h=0; h < nirrep_; ++h) {
+            if(bucketSize[n][h])
+                psio_->write(I.filenum, I.label, (char *) I.matrix[h][0],
+                bucketSize[n][h]*((long int) sizeof(double)), next, &next);
+            free_block(I.matrix[h]);
+        }
+    } /* end loop over buckets/passes */
+
+
+
+    /* Get rid of the input integral file */
+    psio_->open(PSIF_MO_TPDM, PSIO_OPEN_OLD);
+    psio_->close(PSIF_MO_TPDM, 1);
+
+    free_int_matrix(bucketMap);
+
+    for(int n=0; n < nBuckets; ++n) {
+        free(bucketOffset[n]);
+        free(bucketRowDim[n]);
+        free(bucketSize[n]);
+    }
+    free(bucketOffset);
+    free(bucketRowDim);
+    free(bucketSize);
+
+    dpd_set_default(currentActiveDPD);
+
+    set_DCFT(true);
+
+    global_dpd_->file4_close(&I);
+
+    global_dpd_->buf4_init(&Itot, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"),
+                           ID("[A>=A]+"), ID("[A>=A]+"), 0, "MO TPDM (AA|AA)");
+    global_dpd_->buf4_init(&Ibuf, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"),
+                           ID("[A>=A]+"), ID("[A>=A]+"), 0, "MO TPDM (AA|AA) TEMP");
+    global_dpd_->buf4_axpy(&Ibuf, &Itot, 1.0);
+    global_dpd_->buf4_close(&Ibuf);
+    global_dpd_->buf4_close(&Itot);
+
+    psio_->close(PSIF_TPDM_PRESORT, 1);
+
+
+//    psio_->open(PSIF_TPDM_PRESORT, PSIO_OPEN_OLD);
+//    global_dpd_->buf4_init(&Itot, PSIF_TPDM_PRESORT, 0, ID("[A>=A]+"), ID("[A>=A]+"),
+//                           ID("[A>=A]+"), ID("[A>=A]+"), 0, "MO TPDM (AA|AA)");
+//    global_dpd_->buf4_print(&Itot, "outfile", 1);
+//    global_dpd_->buf4_close(&Itot);
+//    psio_->close(PSIF_TPDM_PRESORT, 1);
 
 }
 
